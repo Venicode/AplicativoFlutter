@@ -4,96 +4,112 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-          // This is the theme of your application./
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.purple),
-      home: Container(
-          color: Colors.black,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children:[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      color: Colors.red,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.orange,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.yellow,
-                      height: 100,
-                      width: 100,
-                    )
-                  ],
+      theme: ThemeData(primarySwatch: Colors.lightGreen),
+      home: Scaffold(
+        appBar: AppBar(
+          title:
+              Text('Lista de Tarefas', style: TextStyle(color: Colors.white)),
+        ),
+        body: ListView(
+          children: [
+            Task('Aprender Flutter'),
+            Task('Aprender C#'),
+            Task('Descansar'),
+            Task('Aprender Flutter na plataforma da Alura'),
+            Task('Aprender C#'),
+            Task('Descansar'),
+            Task('Aprender Flutter'),
+            Task('Aprender C#'),
+            Task('Descansar')
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (() => {}),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Task extends StatefulWidget {
+  const Task(this.nomeTarefa, {Key? key}) : super(key: key);
+  final String nomeTarefa;
+
+  @override
+  State<Task> createState() => _TaskState();
+}
+
+class _TaskState extends State<Task> {
+  int nivel = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.lightGreen,
+              height: 140,
+            ),
+            Column(
+              children: [
+                Container(
+                  color: Colors.white,
+                  height: 100,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          color: Colors.black26,
+                          width: 72,
+                          height: 100,
+                        ),
+                        Container(
+                          width: 200,
+                          child: Text(
+                            widget.nomeTarefa,
+                            style: TextStyle(
+                                fontSize: 15, overflow: TextOverflow.ellipsis),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: (() {
+                            setState(() {
+                              nivel++;
+                            });
+                            print(nivel);
+                          }),
+                          child: Icon(Icons.arrow_drop_up, color: Colors.white),
+                        )
+                      ]),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      color: Colors.green,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.cyan,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.blue,
-                      height: 100,
-                      width: 100,
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      color: Colors.purple,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.pink,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.white,
-                      height: 100,
-                      width: 100,
-                    )
-                  ],
+                Text(
+                  "Nível: $nivel",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
                 )
-              
-              ])),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
