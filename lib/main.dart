@@ -20,20 +20,22 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(primarySwatch: Colors.lightGreen),
       home: Scaffold(
         appBar: AppBar(
+          leading: Container(
+              child: Icon(
+            Icons.task_rounded,
+            color: Colors.white,
+            size: 40,
+          )),
           title:
               Text('Lista de Tarefas', style: TextStyle(color: Colors.white)),
         ),
         body: ListView(
           children: [
-            Task('Aprender Flutter'),
-            Task('Aprender C#'),
-            Task('Descansar'),
-            Task('Aprender Flutter na plataforma da Alura'),
-            Task('Aprender C#'),
-            Task('Descansar'),
-            Task('Aprender Flutter'),
-            Task('Aprender C#'),
-            Task('Descansar')
+            Task('Regar plantinhas'),
+            Task('Programar'),
+            Task('Dormir'),
+            Task('Beber água'),
+            Task('Caminhar')
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -78,9 +80,10 @@ class _TaskState extends State<Task> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          color: Colors.black26,
                           width: 72,
                           height: 100,
+                          child: Image.network("https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large",
+                          fit: BoxFit.cover),
                         ),
                         Container(
                           width: 200,
@@ -90,20 +93,51 @@ class _TaskState extends State<Task> {
                                 fontSize: 15, overflow: TextOverflow.ellipsis),
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: (() {
-                            setState(() {
-                              nivel++;
-                            });
-                            print(nivel);
-                          }),
-                          child: Icon(Icons.arrow_drop_up, color: Colors.white),
+                        Container(
+                          height: 60,
+                          width: 60,
+                          child: ElevatedButton(
+                            onPressed: (() {
+                              setState(() {
+                                nivel++;
+                              });
+                              print(nivel);
+                            }),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.arrow_drop_up, color: Colors.white),
+                                Text("UP",
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.white))
+                              ],
+                            ),
+                          ),
                         )
                       ]),
                 ),
-                Text(
-                  "Nível: $nivel",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Container(
+                        child: LinearProgressIndicator(
+                          color: Colors.white,
+                          value: nivel / 10,
+                        ),
+                        width: 200,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        "Nível: $nivel",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                  ],
                 )
               ],
             )
