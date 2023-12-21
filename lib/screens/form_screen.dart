@@ -19,6 +19,7 @@ class _FormScreenState extends State<FormScreen> {
       key: _formkey,
       child: Scaffold(
           appBar: AppBar(
+            foregroundColor: Colors.white,
             title: const Text(
               'Nova tarefa',
               style: TextStyle(color: Colors.white),
@@ -30,7 +31,7 @@ class _FormScreenState extends State<FormScreen> {
                   height: 650,
                   width: 375,
                   decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1)),
                   child: Column(
@@ -102,7 +103,7 @@ class _FormScreenState extends State<FormScreen> {
                         height: 100,
                         width: 100,
                         decoration: BoxDecoration(
-                            color: Colors.green,
+                            color: Colors.lightGreen,
                             borderRadius: BorderRadius.circular(10),
                             border:
                                 Border.all(width: 2, color: Colors.lightGreen)),
@@ -124,9 +125,12 @@ class _FormScreenState extends State<FormScreen> {
                               print(nameController.text);
                               print(difficultyController.text);
                               print(imageController.text);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Salvando nova tarefa'), backgroundColor: Colors.lightGreen,));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Salvando nova tarefa'),
+                                backgroundColor: Colors.lightGreen,
+                              ));
+                              Navigator.pop(context);
                             }
                           },
                           child: const Text(
