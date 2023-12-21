@@ -82,8 +82,8 @@ class _FormScreenState extends State<FormScreen> {
                           onChanged: (text) {
                             setState(() {});
                           },
-                          validator: (String? value){
-                            if (value!.isEmpty){
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
                               return 'Insira o url da imagem';
                             }
                             return null;
@@ -110,8 +110,8 @@ class _FormScreenState extends State<FormScreen> {
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
                             imageController.text,
-                            errorBuilder: (BuildContext context, Object exception,
-                                StackTrace? stackTrace) {
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
                               return Image.asset('assets/images/no-photos.png');
                             },
                             fit: BoxFit.cover,
@@ -120,11 +120,15 @@ class _FormScreenState extends State<FormScreen> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            if(_formkey.currentState!.validate()){
-                            print(nameController.text);
-                            print(difficultyController.text);
-                            print(imageController.text);
-                          }},
+                            if (_formkey.currentState!.validate()) {
+                              print(nameController.text);
+                              print(difficultyController.text);
+                              print(imageController.text);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Salvando nova tarefa'), backgroundColor: Colors.lightGreen,));
+                            }
+                          },
                           child: const Text(
                             'Adicionar!',
                             style: TextStyle(color: Colors.white),
