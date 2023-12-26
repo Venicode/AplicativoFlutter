@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:primeiroappflutter/data/task_inherited.dart';
 import 'package:primeiroappflutter/screens/form_screen.dart';
-import '../components/task.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({Key? key}) : super(key: key);
@@ -23,19 +23,7 @@ class _InitialScreenState extends State<InitialScreen> {
             style: TextStyle(color: Colors.white)),
       ),
       body: ListView(
-        children: const [
-          Task('Jogar', 'assets/images/task_jogar.webp', 3, 12),
-          Task('Ver filmes', 'assets/images/task_filmes.jpeg', 2, 10),
-          Task('Estudar inglês', 'assets/images/task_estudar_ingles.webp', 4,
-              14),
-          Task('Beber água', 'assets/images/task_beber_agua.webp', 1, 4),
-          Task('Regar plantinhas', 'assets/images/task_regar_plantinhas.jpeg',
-              2, 6),
-          Task('Tomar sol', 'assets/images/task_tomar_sol.webp', 1, 4),
-          SizedBox(
-            height: 80,
-          )
-        ],
+        children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
